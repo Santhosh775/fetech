@@ -1,3 +1,5 @@
+// Backend code (app.js or server.js)
+
 const express = require('express');
 const mysql = require('mysql');
 const multer = require('multer');
@@ -45,44 +47,57 @@ const upload = multer({
         if (extname && mimetype) {
             return cb(null, true);
         } else {
-            cb('Error: Images only!');
+            cb(new Error('Images only!'));
         }
     }
 });
 
-// API endpoint to add product
-app.post('/api/products', upload.single('image'), (req, res) => {
-  try {
-      const { productName, organizationName, mrfRate, techniciansRate, distributorsRate, aboutProduct } = req.body;
-      const image = req.file ? req.file.filename : null;
+// API endpoint to fetch all products
+app.get('/api/products', (req, res) => {
+    const query = 'SELECT * FROM products';
 
-      // Convert rates to decimals
-      const mrfRateDecimal = parseFloat(mrfRate);
-      const techniciansRateDecimal = parseFloat(techniciansRate);
-      const distributorsRateDecimal = parseFloat(distributorsRate);
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error('Error fetching products:', err.message);
+            return res.status(500).json({ message: 'Failed to retrieve products' });
+        }
 
-      if (isNaN(mrfRateDecimal) || isNaN(techniciansRateDecimal) || isNaN(distributorsRateDecimal)) {
-          return res.status(400).json({ message: 'Invalid rate values' });
-      }
-
-      // Insert data into MySQL
-      const query = 'INSERT INTO products (productName, organizationName, mrfRate, techniciansRate, distributorsRate, aboutProduct, image) VALUES (?, ?, ?, ?, ?, ?)';
-      const values = [productName, organizationName, mrfRateDecimal, techniciansRateDecimal, distributorsRateDecimal, aboutProduct, image];
-
-      db.query(query, values, (err, result) => {
-          if (err) {
-              console.error('Error inserting product into database:', err.message);
-              return res.status(500).json({ message: 'Failed to add product' });
-          }
-
-          res.status(200).json({ message: 'Product added successfully', productId: result.insertId });
-      });
-  } catch (error) {
-      console.error('Error processing form data:', error);
-      res.status(500).json({ message: 'Failed to add product' });
-  }
+        res.status(200).json(results);
+    });
 });
 
+// API endpoint to add product
+app.post('/api/products', upload.single('image'), (req, res) => {
+    try {
+        const { productName, organizationName, mrfRate, techniciansRate, distributorsRate, aboutProduct } = req.body;
+        const image = req.file ? req.file.filename : null;
+
+        // Convert rates to decimals
+        const mrfRateDecimal = parseFloat(mrfRate);
+        const techniciansRateDecimal = parseFloat(techniciansRate);
+        const distributorsRateDecimal = parseFloat(distributorsRate);
+
+        if (isNaN(mrfRateDecimal) || isNaN(techniciansRateDecimal) || isNaN(distributorsRateDecimal)) {
+            return res.status(400).json({ message: 'Invalid rate values' });
+        }
+
+        // Insert data into MySQL
+        const query = 'INSERT INTO products (productName, organizationName, mrfRate, techniciansRate, distributorsRate, aboutProduct, image) VALUES (?, ?, ?, ?, ?, ?, ?)';
+        const values = [productName, organizationName, mrfRateDecimal, techniciansRateDecimal, distributorsRateDecimal, aboutProduct, image];
+
+        db.query(query, values, (err, result) => {
+            if (err) {
+                console.error('Error inserting product into database:', err.message);
+                return res.status(500).json({ message: 'Failed to add product' });
+            }
+
+            res.status(200).json({ message: 'Product added successfully', productId: result.insertId });
+        });
+    } catch (error) {
+        console.error('Error processing form data:', error);
+        res.status(500).json({ message: 'Failed to add product' });
+    }
+});
 
 // Start server
 const PORT = 5000;

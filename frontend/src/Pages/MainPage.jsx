@@ -1,16 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle';
 import '../Pages/MainPage.css';
 import Propic from '../Assets/profile-pic.png';
 import Card from './Card';
+import axios from 'axios';
 
 const MainPage = () => {
-  const cardData = Array(20).fill({
-    title: 'AC Outdoor Stand Wall Stand Split Ac',
-    price: '3,000.00',
-    brand: 'Blue Star Brand'
-  });
+  const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
+
+  // Fetch products from the backend
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/products')
+      .then(response => {
+        setProducts(response.data);
+      })
+      .catch(error => {
+        console.error("There was an error fetching the products!", error);
+      });
+  }, []);
+
+  // Add product to cart
+  const handleAddToCart = (product) => {
+    setCart((prevCart) => {
+      const existingProduct = prevCart.find(item => item.id === product.id);
+      if (existingProduct) {
+        // If product already in cart, increase the quantity
+        return prevCart.map(item => 
+          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      } else {
+        // If product not in cart, add it
+        return [...prevCart, { ...product, quantity: 1 }];
+      }
+    });
+  };
 
   return (
     <>
@@ -47,12 +72,14 @@ const MainPage = () => {
       </div>
 
       <div className="card-section">
-        {cardData.map((data, index) => (
+        {products.map((product) => (
           <Card 
-            key={index} 
-            title={data.title} 
-            price={data.price} 
-            brand={data.brand} 
+            key={product.id} 
+            title={product.productName} 
+            price={product.mrfRate} 
+            brand={product.organizationName} 
+            image={product.image} 
+            handleAddToCart={() => handleAddToCart(product)}
           />
         ))}
       </div>

@@ -1,8 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import outdoorStand from '../Assets/ac-outdoor-stand.png';
 
-const Card = ({ title, price, brand }) => {
+const Card = ({ title, price, brand, image }) => {
   const navigate = useNavigate();
 
   const handleAddToCart = () => {
@@ -11,7 +10,7 @@ const Card = ({ title, price, brand }) => {
 
   return (
     <div className="card">
-      <img src={outdoorStand} alt="Outdoor Stand" />
+      <img src={`http://localhost:5000/uploads/${image}`} alt="Product" />
       <p>{title}</p>
       <span></span>
       <h4>Rs-{price}</h4>

@@ -5,6 +5,7 @@ import NavBar from './Components/NavBar';
 import Cart from './Pages/Cart';
 import PaymentSuccess from './Pages/PaymentSuccess';
 import ProductForm from './Pages/ProductForm'
+import Dashboard from './Pages/Dashboard';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
          <Route path='/Cart' element={<Cart/>} />
          <Route path='/Payment-success' element={<PaymentSuccess/>} />
          <Route path='/ProductForm' element={<ProductForm />} />
+         <Route path='/admin' element={<Dashboard />} />
        </Routes>
      </BrowserRouter>
     </>
