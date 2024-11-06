@@ -1,0 +1,231 @@
+.card-section{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 50px 10px 20px 10px !important;
+}
+
+.nav-container{
+  margin-top: -20px;
+}
+
+.Mob-nav{
+    display: none;
+}
+
+.card{
+    width: 300px;
+    height: 530px !important;
+    border-radius: 10px;
+    margin: 20px 30px;
+}
+
+.card img{
+    margin-top: 20px !important;
+    width: 220px;
+    height: 220px !important;
+    margin-left: 8%;
+}
+
+.card p {
+    margin-top: 30px;
+    margin-left: 20px;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    padding-bottom: 8%;
+}
+
+.card span{
+    width: 250px;
+    border-bottom: 0.5px solid #cac9c9;
+    margin-top: -10px;
+    margin-left: 8%;
+}
+
+
+h4{
+    font-weight: 700;
+    margin-top: 10px;
+    margin-left: 8%;
+    margin-top: 30px;
+    font-size: 20px;
+}
+
+small{
+    font-size: 15px;
+    font-weight: 400;
+    margin-left: 8%;
+}
+
+.card button{
+    height: 40px !important;
+    width: 200px;
+    border-radius: 10px;
+    background-color: #0024FF !important;
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    margin-left: 16%;
+    margin-top: 20px;
+}
+
+  .search-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+    height: 60px;
+    border-radius: 20px;
+    margin-top: 50px;
+    /* margin-top: 0%; */
+    margin-left: 400px;
+    border: 1px solid #808080;
+    padding: 0 15px; /* Optional for extra spacing */
+}
+
+.search-input {
+    flex: 1; /* Ensures the input takes up available space */
+    border: none;
+    outline: none;
+    height: 100%;
+    padding-left: 15px; /* Add padding if desired */
+}
+
+.search-icons {
+    display: flex;
+    align-items: center;
+}
+
+.divider {
+    width: 1px;
+    height: 20px;
+    background-color: #808080;
+    margin: 0 10px;
+}
+
+
+  button{
+    width: 240px;
+    height: 80px;
+    border-radius: 10px;
+    background: #0024FF;
+    color: white;
+    font-size: 32px;
+    border: none;
+    margin-left: 40px !important;
+}
+
+.nav-links button{
+  margin-top: -20px !important;
+  margin-left: -0.2% !important;
+}
+
+ /* Media Query for Mobile Devices */
+ @media (max-width: 480px){
+   .nav-links{
+    display: none !important;
+   }
+
+  /* .navigate{
+    display: none !important;
+   } */
+
+   .search-container{
+    width: 80%;
+    height: 40px;
+    margin-left: 10%;
+    margin-top: 20px;
+    border: 1px solid #808080;
+    padding: 0 15px; /* Optional for extra spacing */
+   }
+
+   .search-container input::placeholder{
+    font-size: 20px !important;
+    padding: 0;
+    margin-top: 5px !important;
+  }
+
+  .search-icons{
+    display: none !important;
+  }
+
+   .Mob-nav{
+    display: flex;
+    justify-content: space-around !important;
+    align-items: center;
+    font-size: 24px;
+    border: none;
+    padding: 0px !important;
+    margin-top: 10px;
+   }
+
+   .card{
+    margin: 20px 0px;
+    width: 40% !important;
+    height: 40%!important;
+    
+   } 
+
+   .card-section{
+    display: flex !important;
+    flex-wrap: wrap !important;
+    margin: 10px 10px !important;
+    
+    
+   }
+
+   .card img{
+    margin-top: 20px !important;
+    width: 80% !important;
+    height: 60%!important;
+    margin-left: 10% !important;
+}
+
+.card p {
+    margin-top: 20px;
+    margin-left: 14px;
+    font-size: 10px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    padding-bottom: 8%;
+}
+
+.card span{
+    width: 120px;
+    border-bottom: 0.5px solid #cac9c9;
+    margin-top: -10px;
+    margin-left: 8% !important;
+}
+
+h4{
+    font-weight: 700;
+    margin-top: 20px;
+    margin-left: 8%;
+    font-size: 10px;
+}
+
+small{
+    font-size: 10px;
+    font-weight: 400;
+    margin-left: 8%;
+}
+
+.card button{
+    height: 40px !important;
+    width: 100px !important;
+    border-radius: 10px;
+    background-color: #0024FF !important;
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    margin-left: 19% !important;
+    margin-top: 20px;
+}
+ }
